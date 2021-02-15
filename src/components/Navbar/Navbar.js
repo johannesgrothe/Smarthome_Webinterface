@@ -1,54 +1,39 @@
-import {Navigation} from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
-import React,{Component} from "react";
+import React from 'react';
+import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
+import styled from 'styled-components';
 
-class SideNavPage extends React.Component {
-    render() {
-        return (
-            <>
-                <Navigation
-                    // you can use your own router's api to get pathname
-                    activeItemId="/management/members"
-                    onSelect={({itemId}) => {
-                        // maybe push to the route
-                    }}
-                    items={[
-                        {
-                            title: 'Dashboard',
-                            itemId: '/dashboard',
-                            // you can use your own custom Icon component as well
-                            // icon is optional
-                        },
-                        {
-                            title: 'Management',
-                            itemId: '/management',
-                            subNav: [
-                                {
-                                    title: 'Projects',
-                                    itemId: '/management/projects',
-                                },
-                                {
-                                    title: 'Members',
-                                    itemId: '/management/members',
-                                },
-                            ],
-                        },
-                        {
-                            title: 'Another Item',
-                            itemId: '/another',
-                            subNav: [
-                                {
-                                    title: 'Teams',
-                                    itemId: '/management/teams',
-                                },
-                            ],
-                        },
-                    ]}
-                />
-            </>
-
-        );
-    }
+const Styles = styled.div`
+  .navbar { background-color: #222; }
+  a, .navbar-nav, .navbar-light .nav-link {
+    color: #9FFFCB;
+    &:hover { color: white; }
+  }
+  .navbar-brand {
+    font-size: 1.4em;
+    color: #9FFFCB;
+    &:hover { color: white; }
+  }
+  .form-center {
+    position: absolute !important;
+    left: 25%;
+    right: 25%;
+  }
+`;
+const NavigationBar = () => {
+    return (
+        <Styles>
+            <Navbar expand="lg">
+                <Navbar.Brand href="/">Tutorial</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ml-auto">
+                        <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>
+                        <Nav.Item><Nav.Link href="/MainPage">Dashboard</Nav.Link></Nav.Item>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        </Styles>
+    )
 }
 
-export default SideNavPage;
+export default NavigationBar;

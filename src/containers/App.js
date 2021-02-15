@@ -1,15 +1,19 @@
 import logo from '../logo.svg';
 import './App.css';
 import Header from "../components/Header/Header";
-import SideNavPage from "../components/Navbar/Navbar";
+import PagesLayout from "../components/PagesLayout";
 
 function App() {
-  return (
-    <div className="App">
-      <Header logo={logo}/>
-      <SideNavPage/>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div>
+                <Header logo={logo}/>
+            </div>
+            <div>
+                <PagesLayout/>
+            </div>
+        </div>
+    );
 }
 
 export default App;
