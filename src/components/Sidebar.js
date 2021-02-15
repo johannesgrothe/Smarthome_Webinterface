@@ -20,24 +20,24 @@ class SideNav extends React.Component {
             activePath: props.location.pathname,
             items: [
                 {
-                    path: '/', /* path is used as id to check which NavItem is active basically */
-                    name: 'Home',
-                    css: 'fa fa-fw fa-home',
-                    key: 1 /* Key is required, else console throws error. Does this please you Mr. Browser?! */
+                  path: '/', /* path is used as id to check which NavItem is active basically */
+                  name: 'Home',
+                  css: 'fa fa-fw fa-home',
+                  key: 1 /* Key is required, else console throws error. Does this please you Mr. Browser?! */
                 },
                 {
-                    path: '/about',
-                    name: 'About',
-                    css: 'fa fa-fw fa-clock',
-                    key: 2
+                  path: '/about',
+                  name: 'About',
+                  css: 'fa fa-fw fa-clock',
+                  key: 2
                 },
                 {
-                    path: '/NoMatch',
-                    name: 'NoMatch',
-                    css: 'fas fa-hashtag',
-                    key: 3
+                  path: '/NoMatch',
+                  name: 'NoMatch',
+                  css: 'fas fa-hashtag',
+                  key: 3
                 },
-            ]
+              ]
         }
     }
 
@@ -52,7 +52,7 @@ class SideNav extends React.Component {
                 {
                     items.map((item) => {
                         return (
-                            <NavItem
+                            <NavItem 
                                 path={item.path}
                                 name={item.name}
                                 css={item.css}
@@ -104,6 +104,7 @@ class NavItem extends React.Component {
 }
 
 const NavIcon = styled.div`
+
 `;
 
 export default class Sidebar extends React.Component {
