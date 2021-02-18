@@ -14,69 +14,59 @@ export default class MainPage extends Component {
     }
 
 componentDidMount() {
-    const MY_API_URL = "192.168.178.158:4999/info"
+    const MY_API_URL = "http://192.168.178.111:4999/info"
     console.log("huhu");
     fetch(MY_API_URL)
-        .then(result => {
-            console.log(result);
-            return result.json();})
-        .then(json => {
-            console.log(json);
-            return "fck ya all"
-        });
-        // .then(res => {
-        //     let data = res.results.map((body) => {
-        //         return (
-        //             <div key={data.results}>
-        //             </div>
-        //         )
-        //     })
-        //     this.setState({info: data});
-        //     console.log("state", this.state.info)
-        //
+        .then(response => {return response.json()})
+        .then(res => {
+            this.setState({info: res})
+            console.log("state", this.state.info)
+        })
 }
-    // const [data, setData] = useState({res: [], isFetching: false});
-    // useEffect(() => {
-    //     const fetchBody = async () => {
-    //         try {
-    //             setData({res: data.body, isFetching: true});
-    //             let response;
-    //             [response] = await Promise.all([axios.get(MY_API_URL)]);
-    //             setData({res: [response].data, isFetching: false});
-    //         } catch (e) {
-    //             console.log(e);
-    //             setData({res: data.body, isFetching: false});
-    //         }
-    //     };
-    //     fetchBody();
-    // }, []);
 
     render() {
         return(
-            <Container width="90%">
+            <Container width="100%">
                 <Row className="justify-content-center">
                     <Col>
                         <Card>
-                            <Card.Body> Bridge Name  </Card.Body>
+                            <Card.Body> Bridge Name: {this.state.info.bridge_name} </Card.Body>
                         </Card>
                     </Col>
                 </Row>
                 <Row height="30%">
                     <Col>
                         <Card>
-                            <Card.Body>Number of Chips connected to Bridge: ${this.state.info}</Card.Body>
+                            <Card.Body>Number of Chips connected to Bridge: {this.state.info.client_count}</Card.Body>
                         </Card>
                     </Col>
                     <Col>
                         <Card>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body>Number of Gadgets connected to Bridge: {this.state.info.gadget_count}</Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Body>Number of Connectors connected to Bridge: {this.state.info.connector_count}</Card.Body>
                         </Card>
                     </Col>
                 </Row>
-                <Row>
-                    <div>
-                        {}
-                    </div>
+                <Row height="30%">
+                    <Col>
+                        <Card>
+                            <Card.Body>running since: {this.state.info.running_since}</Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Body>sw branch/commit: {this.state.info.software_branch} / {this.state.info.software_commit}</Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Body>tbd: </Card.Body>
+                        </Card>
+                    </Col>
                 </Row>
             </Container>
         )
