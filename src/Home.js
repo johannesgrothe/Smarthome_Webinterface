@@ -14,8 +14,8 @@ export default class MainPage extends Component {
     }
 
 componentDidMount() {
-    const MY_API_URL = "http://192.168.178.111:4999/info"
-    console.log("huhu");
+    const API_IP = window.location.host.split(':')[0]
+    const MY_API_URL = `http://${API_IP}:4999/info`
     fetch(MY_API_URL)
         .then(response => {return response.json()})
         .then(res => {
