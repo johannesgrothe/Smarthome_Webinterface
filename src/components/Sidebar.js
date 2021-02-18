@@ -96,7 +96,7 @@ class NavItem extends React.Component {
         return(
             <StyledNavItem active={active}>
                 <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
-                    <NavIcon></NavIcon>
+                    <NavIcon/>
                 </Link>
             </StyledNavItem>
         );
@@ -110,7 +110,7 @@ const NavIcon = styled.div`
 export default class Sidebar extends React.Component {
     render() {
         return (
-            <RouterSideNav></RouterSideNav>
+            <RouterSideNav/>
         );
     }
 }
