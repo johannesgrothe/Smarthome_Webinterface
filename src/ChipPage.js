@@ -6,31 +6,7 @@ export default class ChipPage extends Component {
     constructor() {
         super();
         this.state = {
-            "client_count": 2,
-                "clients": [
-                {
-                    "boot_mode": 3,
-                    "created": "2021-02-22 15:27:48",
-                    "is_active": false,
-                    "last_connected": "1900-01-01 00:00:00",
-                    "name": "dummy_client1",
-                    "port_mapping": {},
-                    "sw_branch": null,
-                    "sw_uploaded": null,
-                    "sw_version": null
-                },
-                {
-                    "boot_mode": 3,
-                    "created": "2021-02-22 15:27:48",
-                    "is_active": false,
-                    "last_connected": "1900-01-01 00:00:00",
-                    "name": "dummy_client2",
-                    "port_mapping": {},
-                    "sw_branch": null,
-                    "sw_uploaded": null,
-                    "sw_version": null
-                }
-            ]
+            clients: [],
         }
     }
 
@@ -41,31 +17,29 @@ export default class ChipPage extends Component {
                 return response.json()
             })
             .then(res => {
-                console.log(res)
-                // this.setState({clients: res})
+                this.setState(res)
                 console.log("state", this.state.clients)
             })
 
     }
-
+    
     render() {
         return(
             <div>
                 <Container>
-                    {this.state.clients.map((client_data) => {
-                        // return React.createElement("h2", null, client_data.name)
+                    {this.state.clients.map((client_info, index) => {
                         return (
-                            <Card>
-                                <Card.Title>{client_data.name}</Card.Title>
+                            <Card key={index} value={client_info}>
+                                <Card.Title>{client_info.name}</Card.Title>
                                 <Card.Body>
-                                    <p>boot mode: {client_data.boot_mode}</p>
-                                    <p>created: {client_data.created}</p>
-                                    <p>is_active: {client_data.is_active}</p>
-                                    <p>last_connected: {client_data.last_connected}</p>
+                                    <p>boot mode: {client_info.boot_mode}</p>
+                                    <p>created: {client_info.created}</p>
+                                    <p>is_active: {client_info.is_active}</p>
+                                    <p>last_connected: {client_info.last_connected}</p>
                                     {/*<a>port_mapping: {client_data.port_mapping}</a>*/}
-                                    <p>sw_branch: {client_data.sw_branch}</p>
-                                    <p>sw_uploaded: {client_data.sw_uploaded}</p>
-                                    <p>sw_version: {client_data.sw_version}</p>
+                                    <p>sw_branch: {client_info.sw_branch}</p>
+                                    <p>sw_uploaded: {client_info.sw_uploaded}</p>
+                                    <p>sw_version: {client_info.sw_version}</p>
                                 </Card.Body>
                             </Card>
                         )
