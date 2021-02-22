@@ -8,6 +8,7 @@ import { NoMatch } from './NoMatch';
 import Sidebar from './components/Sidebar';
 import {NavigationBar} from "./components/NavigationBar";
 import MainPage from "./Home";
+import ChipPage from "./ChipPage";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Sidebar />
         <Switch>
           <Route exact path="/" component={MainPage}/>
-          <Route path="/about" component={About} />
+          <Route path="/chip_page" component={ChipPage} />
           <Route component={NoMatch} />
         </Switch>
       </Router>
