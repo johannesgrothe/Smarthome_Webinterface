@@ -28,11 +28,13 @@ export default class ClientPage extends Component {
         return(
             <div>
                 <Container>
-                    {this.state.clients.map((client_info, index) => {
-                        return (
-                            <ClientContainer client_data={client_info} key={index}/>
-                        )
-                    })}
+                    <Row>
+                        {this.state.clients.map((client_info, index) => {
+                            return (
+                                <Col xs={12} md={6} lg={4} style={{marginTop:10}}><ClientContainer client_data={client_info} key={index}/></Col>
+                            )
+                        })}
+                    </Row>
                 </Container>
             </div>
         )
