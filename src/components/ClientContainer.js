@@ -4,8 +4,10 @@ import {Card} from "react-bootstrap";
 export default class ClientContainer extends Component {
     constructor(client_data) {
         super();
+        console.log("data: ", client_data)
         this.state = client_data
     }
+
     render() {
         return(
             <Card>

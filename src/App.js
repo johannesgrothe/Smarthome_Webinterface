@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import {NavigationBar} from "./components/NavigationBar";
 import MainPage from "./Home";
 import ClientPage from "./ClientPage";
+import GadgetPage from "./GadgetPage";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={MainPage}/>
           <Route path="/chip_page" component={ClientPage} />
-          <Route component={NoMatch} />
+          <Route path="/gadget_page" component={GadgetPage} />
         </Switch>
       </Router>
     </React.Fragment>
