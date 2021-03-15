@@ -32,7 +32,7 @@ export default class GadgetPage extends Component {
                         {this.state.gadgets.map((gadget_info, index) => {
                             console.log("iter data: ", gadget_info)
                             return (
-                                <Col xs={12} md={6} lg={4} style={{marginTop:10}}><GadgetContainer gadget_data={gadget_info} key={index}/></Col>
+                                <Col xs={14} md={8} lg={6} style={{marginTop:10}}><GadgetContainer gadget_data={gadget_info} key={index}/></Col>
                             )
                         })}
                     </Row>

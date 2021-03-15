@@ -19,7 +19,7 @@ function App() {
         <NavigationBar />
         <Sidebar />
         <Switch>
-          <Route exact path="/" component={MainPage}/>
+          <Route exact path="/" component={MainPage} />
           <Route path="/chip_page" component={ClientPage} />
           <Route path="/gadget_page" component={GadgetPage} />
         </Switch>
