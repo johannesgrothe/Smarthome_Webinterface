@@ -1,0 +1,10 @@
+.idea
+.DS_Store
+package-lock.json
+node_modules/
+.env
+*.png
+*.jpg
+*.jpeg
+.eslintcache
+yarn.lock
