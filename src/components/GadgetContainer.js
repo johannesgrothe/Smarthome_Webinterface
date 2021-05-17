@@ -4,23 +4,26 @@ import {getAPIAddress} from "./GetAPIAddress";
 import {format} from "react-string-format";
 
 async function generate_request(name, data) {
-    let post_data = format('{"characteristic": 3, "value": {0} }', data)
-    let post_json = JSON.parse(post_data)
-    console.log("post_json: ", post_json)
+
+    let req_data = {
+        characteristic: 3,
+        value: data
+    };
 
     const API_URL = getAPIAddress(format('gadgets/{0}/set_characteristic', name));
-    const requestOptions = {
+    console.log("url", API_URL)
+    let response = await fetch(API_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: post_json
-    };
-    console.log("req_opt: ", requestOptions)
-    this.response_body = await fetch(API_URL, requestOptions);
-    // const data_gad = await response.json();
-    console.log("response: ", this.response_body)
-    const response = this.response_body
-    console.log("resp: ", response)
-    return response;
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(req_data)
+    });
+
+    let result = await response.json();
+    // alert(result.status);
+    console.log("result", result)
+    return response
 }
 
 function ToggleGadgetButton({name, data}) {
