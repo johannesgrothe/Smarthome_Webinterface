@@ -28,7 +28,7 @@ export default class HomeContainer extends Component {
             <Row className="justify-content-center">
                 <Col>
                     <Card>
-                        {/*<Card.Body> Bridge Name: {this.state.client_data.bridge_name} </Card.Body>*/}
+                        <Card.Body> Bridge Name: {this.state.client_data.bridge_name} </Card.Body>
                     </Card>
                 </Col>
             </Row>

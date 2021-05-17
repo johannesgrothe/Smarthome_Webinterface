@@ -1,16 +1,53 @@
 import React, {Component, useState} from "react";
-import {Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import {Button, Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import {getAPIAddress} from "./GetAPIAddress";
+import {format} from "react-string-format";
 
-function ToggleGadgetButton () {
-    const [value, setValue] = useState([1]);
-    const handleChange = (val) => setValue(val);
+async function generate_request(name, data) {
+    let post_data = format('{"characteristic": 3, "value": {0} }', data)
+    let post_json = JSON.parse(post_data)
+    console.log("post_json: ", post_json)
+
+    const API_URL = getAPIAddress(format('gadgets/{0}/set_characteristic', name));
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: post_json
+    };
+    console.log("req_opt: ", requestOptions)
+    this.response_body = await fetch(API_URL, requestOptions);
+    // const data_gad = await response.json();
+    console.log("response: ", this.response_body)
+    const response = this.response_body
+    console.log("resp: ", response)
+    return response;
+}
+
+function ToggleGadgetButton({name, data}) {
+
+    function handleChange() {
+        console.log("data_value: ", data)
+        const gadget_value = data
+        let gadget_val;
+        if (data != 0) {
+            gadget_val = data - gadget_value
+        } else {
+            gadget_val = 1
+        }
+        console.log("gadget_value: ", gadget_val)
+        const response = generate_request(name, gadget_val)
+        console.log("response: ", response)
+    };
 
     return (
-        <ToggleButtonGroup type="checkbox" size={"sm"} value={value} onChange={handleChange}>
-            <ToggleButton variant={"outline-primary"} value={1}>
-                <Image src="https://i.pinimg.com/200x150/ec/5b/ee/ec5bee181ba96018838c1a4ee97d5afa.jpg"/>
-            </ToggleButton>
-        </ToggleButtonGroup>
+        <>
+            <Button   type={"checkbox"}
+                      size={"sm"}
+                      onClick={handleChange}
+                      variant={"outline-primary"}
+                      value={data}>ON
+            </Button>
+        </>
     )
 }
 
@@ -19,12 +56,24 @@ export default class GadgetContainer extends Component {
         super(props);
         this.state = {
             data: this.props.gadget_data,
-            gadget_characteristic: []
+            gadget_characteristic: [],
+            gadget_value: [],
+            response_body: []
         }
-        console.log("data: ", this.state.data)
     }
 
     render() {
+        this.state.data.characteristics.map((gadget_characteristic, index) => {
+            this.gadget_value = gadget_characteristic.value
+            this.gadget_characteristic = gadget_characteristic
+            return this.gadget_value
+        })
+        // console.log("res_body: ", this.response)
+        // this.response.body.map((res_body, index) => {
+        //     this.response_body = res_body.body
+        //     return this.response_body
+        // })
+        console.log("gadget_value: ", this.gadget_value)
         return(
             <Card>
                 <Card.Title>
@@ -39,24 +88,23 @@ export default class GadgetContainer extends Component {
                     <Col>
                         <Row>
                             <Col>
-                                <ToggleGadgetButton />
+                                <ToggleGadgetButton
+                                    name={this.state.data.name}
+                                    data={this.gadget_value}
+                                />
                             </Col>
                             <Col>
-                                <a>characteristics: {this.state.data.characteristics.map((gadget_characteristic, index) => {
-                                    console.log("gadget_characteristic: ", gadget_characteristic);
-                                    return (
+                                <a>characteristics:
                                         <div>
                                             <p>
-                                                max: {gadget_characteristic.max}<br/>
-                                                min: {gadget_characteristic.min}<br/>
-                                                step: {gadget_characteristic.step}<br/>
-                                                {/*port_mapping: {gadget_characteristic.port_mapping}<br/>*/}
-                                                type: {gadget_characteristic.type}<br/>
-                                                value: {gadget_characteristic.value}<br/>
+                                                max: {this.gadget_characteristic.max}<br/>
+                                                min: {this.gadget_characteristic.min}<br/>
+                                                step: {this.gadget_characteristic.step}<br/>
+                                                port_mapping: {this.gadget_characteristic.port_mapping}<br/>
+                                                type: {this.gadget_characteristic.type}<br/>
+                                                value: {this.gadget_characteristic.value}<br/>
                                             </p>
                                         </div>
-                                    )
-                                })}
                                 </a>
                             </Col>
                         </Row>

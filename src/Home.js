@@ -28,10 +28,10 @@ export default class MainPage extends Component {
     render() {
         return (
             <Container width="100%">
-                <Row className="justify-content-center">
+                <Row className="justify-content-center" style={{marginBottom: 20, marginTop: 20}}>
                     <Col>
-                        <Card>
-                            <Card.Title>
+                        <Card style={{ width: '100%' }}>
+                            <Card.Title style={{paddingLeft: 10, paddingTop: 10}}>
                                 Bridge
                             </Card.Title>
                             <Card.Body>
@@ -43,10 +43,10 @@ export default class MainPage extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <Row>
+                <Row style={{marginBottom: 20}}>
                     <Col>
                         <Card>
-                            <Card.Title>
+                            <Card.Title style={{paddingLeft: 10, paddingTop: 10}}>
                                 Bridge Software version info
                             </Card.Title>
                             <Card.Body>
@@ -65,7 +65,7 @@ export default class MainPage extends Component {
                 <Row>
                     <Col>
                         <Card>
-                            <Card.Title>
+                            <Card.Title style={{paddingLeft: 10, paddingTop: 10}}>
                                 Clients
                             </Card.Title>
                             <Card.Body> Number of Clients: {this.state.info.client_count} </Card.Body>
@@ -73,7 +73,7 @@ export default class MainPage extends Component {
                     </Col>
                     <Col>
                         <Card>
-                            <Card.Title>
+                            <Card.Title style={{paddingLeft: 10, paddingTop: 10}}>
                                 Gadgets
                             </Card.Title>
                             <Card.Body> Number of Gadgets: {this.state.info.gadget_count} </Card.Body>
@@ -81,7 +81,7 @@ export default class MainPage extends Component {
                     </Col>
                     <Col>
                         <Card>
-                            <Card.Title>
+                            <Card.Title style={{paddingLeft: 10, paddingTop: 10}}>
                                 Connectors
                             </Card.Title>
                             <Card.Body> Number of Connectors: {this.state.info.connector_count} </Card.Body>
