@@ -2,9 +2,7 @@ import React, {Component, useState} from "react";
 import {Button, Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import {getAPIAddress} from "./GetAPIAddress";
 import {format} from "react-string-format";
-import ToggleGadgetButton from "./OnOffButton";
-
-
+import ToggleGadgetButton from "./OnOffButtonGadget";
 
 export default class GadgetContainer extends Component {
     constructor(props) {
@@ -13,14 +11,10 @@ export default class GadgetContainer extends Component {
             data: this.props.gadget_data,
             gadget_characteristic: [],
             gadget_value: [],
-            response_body: []
+            response_body: [],
+            reload: false
         }
     }
-
-    refresh = () => {
-        this.setState({})
-    }
-
 
     render() {
         this.state.data.characteristics.map((gadget_characteristic, index) => {
@@ -28,11 +22,6 @@ export default class GadgetContainer extends Component {
             this.gadget_characteristic = gadget_characteristic
             return this.gadget_value
         })
-        // console.log("res_body: ", this.response)
-        // this.response.body.map((res_body, index) => {
-        //     this.response_body = res_body.body
-        //     return this.response_body
-        // })
         console.log("gadget_value: ", this.gadget_value)
         return(
             <Card>
@@ -47,7 +36,7 @@ export default class GadgetContainer extends Component {
                 <Card.Body>
                     <Col>
                         <Row>
-                            <Col>
+                            <Col md={2}>
                                 <ToggleGadgetButton
                                     name={this.state.data.name}
                                     data={this.gadget_value}
@@ -55,16 +44,16 @@ export default class GadgetContainer extends Component {
                             </Col>
                             <Col>
                                 <a>characteristics:
-                                        <div>
-                                            <p>
-                                                max: {this.gadget_characteristic.max}<br/>
-                                                min: {this.gadget_characteristic.min}<br/>
-                                                step: {this.gadget_characteristic.step}<br/>
-                                                port_mapping: {this.gadget_characteristic.port_mapping}<br/>
-                                                type: {this.gadget_characteristic.type}<br/>
-                                                value: {this.gadget_characteristic.value}<br/>
-                                            </p>
-                                        </div>
+                                    <div>
+                                        <p>
+                                            max: {this.gadget_characteristic.max}<br/>
+                                            min: {this.gadget_characteristic.min}<br/>
+                                            step: {this.gadget_characteristic.step}<br/>
+                                            port_mapping: {this.gadget_characteristic.port_mapping}<br/>
+                                            type: {this.gadget_characteristic.type}<br/>
+                                            value: {this.gadget_characteristic.value}<br/>
+                                        </p>
+                                    </div>
                                 </a>
                             </Col>
                         </Row>

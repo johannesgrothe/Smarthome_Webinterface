@@ -1,18 +1,7 @@
 import React, {Component, useState} from "react";
 import {Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-
-function RestartClientButton(client_id) {
-    const [value, setValue] = useState([1]);
-    const handleChange = (val) => setValue(val);
-
-    return (
-        <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
-            <ToggleButton variant={"outline-primary"} value={1}>
-            </ToggleButton>
-        </ToggleButtonGroup>
-    )
-}
-
+import ToggleGadgetButton from "./OnOffButtonGadget";
+import ToggleClientButton from "./OnOffButtonClient";
 
 export default class ClientContainer extends Component {
     constructor(client_data) {
@@ -27,8 +16,13 @@ export default class ClientContainer extends Component {
                 <Card.Title>{this.state.client_data.name}</Card.Title>
                 <Card.Body>
                     <Row>
-                        <Col md={2}>
-                            <RestartClientButton />
+                        <Col md={3}>
+                            <Row>
+                                <ToggleClientButton name={this.state.client_data.name}/>
+                            </Row>
+                            <Row>
+                            </Row>
+
                         </Col>
                         <Col>
                             <p>

@@ -1,14 +1,12 @@
 import {getAPIAddress} from "./GetAPIAddress";
 import {format} from "react-string-format";
-import {Button} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import React, {useState} from "react";
 
-
-export default function ToggleGadgetButton({name, data}) {
-    const [value, setValue] = useState({})
+export default function ToggleGadgetButton({name, data, reload}) {
+    const [switchButton, setSwitchButton] = useState('On')
 
     function handleChange() {
-        console.log("data_value: ", data)
         const gadget_value = data
         let gadget_val;
         if (data != 0) {
@@ -16,10 +14,14 @@ export default function ToggleGadgetButton({name, data}) {
         } else {
             gadget_val = 1
         }
-        console.log("gadget_value: ", gadget_val)
+        if (switchButton === "Off") {
+            setSwitchButton('On')
+        } else {
+            setSwitchButton('Off')
+        }
         const response = generate_request(name, gadget_val)
         console.log("response: ", response)
-    };
+    }
 
     async function generate_request(name, data) {
 
@@ -29,7 +31,6 @@ export default function ToggleGadgetButton({name, data}) {
         };
 
         const API_URL = getAPIAddress(format('gadgets/{0}/set_characteristic', name));
-        console.log("url", API_URL)
         let response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -41,7 +42,7 @@ export default function ToggleGadgetButton({name, data}) {
         let result = await response.json();
         // alert(result.status);
         console.log("result", result)
-        window.location.reload()
+        // this.props.reloadChild()
         return response
     }
 
@@ -51,8 +52,9 @@ export default function ToggleGadgetButton({name, data}) {
                       size={"sm"}
                       onClick={handleChange}
                       variant={"outline-primary"}
-                      value={value}>ON
+                      > {switchButton}
             </Button>
         </>
     )
 }
+
