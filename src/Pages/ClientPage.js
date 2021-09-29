@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
-import {getAPIAddress} from "./components/GetAPIAddress";
-import ClientContainer from "./components/ClientContainer";
+import {getAPIAddress} from "../components/GetAPIAddress";
+import ClientContainer from "../components/container/ClientContainer";
+import getClientData from "../components/DataManager"
+import DataManager from "../components/DataManager";
 
 export default class ClientPage extends Component {
     constructor() {
@@ -21,7 +23,6 @@ export default class ClientPage extends Component {
                 this.setState(res)
                 console.log("state", this.state.clients)
             })
-
     }
 
     render() {

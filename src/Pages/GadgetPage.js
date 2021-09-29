@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
-import {getAPIAddress} from "./components/GetAPIAddress";
-import GadgetContainer from "./components/GadgetContainer";
+import {getAPIAddress} from "../components/GetAPIAddress";
+import GadgetContainer from "../components/container/GadgetContainer";
+import GadgetManager from "../components/DataManager"
 
 export default class GadgetPage extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             gadgets: [],
         }
@@ -21,7 +22,6 @@ export default class GadgetPage extends Component {
                 this.setState(res)
                 console.log("state", this.state.gadgets)
             })
-
     }
 
     render() {

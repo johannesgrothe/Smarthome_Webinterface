@@ -4,9 +4,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Sidebar from './components/Sidebar';
 import {NavigationBar} from "./components/NavigationBar";
-import MainPage from "./Home";
-import ClientPage from "./ClientPage";
-import GadgetPage from "./GadgetPage";
+import MainPage from "./Pages/Home";
+import ClientPage from "./Pages/ClientPage";
+import GadgetPage from "./Pages/GadgetPage";
 
 
 function App() {

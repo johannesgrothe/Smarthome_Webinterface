@@ -1,8 +1,9 @@
 import React, {Component, useState} from 'react';
 import {Card, Col, Container, Image, Row} from "react-bootstrap";
-import {getAPIAddress} from "./components/GetAPIAddress";
-import HomeContainer from "./components/HomeContainer";
-import GadgetContainer from "./components/GadgetContainer";
+import {getAPIAddress} from "../components/GetAPIAddress";
+import DataManager from "../components/DataManager";
+import HomeContainer from "../components/container/HomeContainer";
+import GadgetContainer from "../components/container/GadgetContainer";
 
 
 export default class MainPage extends Component {
@@ -14,15 +15,11 @@ export default class MainPage extends Component {
     }
 
     componentDidMount() {
-        const API_URL = getAPIAddress("info")
-        fetch(API_URL)
-            .then(response => {
-                return response.json()
-            })
-            .then(res => {
-                this.setState({info: res})
-                console.log("state", this.state.info)
-            })
+       let dataManager = new DataManager()
+       dataManager.getBridgeInfo("info")
+           .then(res => {
+               this.setState({info:res})
+           })
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React, {Component, useState} from "react";
 import {Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-import ToggleGadgetButton from "./OnOffButtonGadget";
-import ToggleClientButton from "./OnOffButtonClient";
+import ToggleGadgetButton from "../Buttons/gadget buttons/OnOffButtonGadget";
+import ToggleClientButton from "../Buttons/client buttons/OnOffButtonClient";
 
 export default class ClientContainer extends Component {
     constructor(client_data) {

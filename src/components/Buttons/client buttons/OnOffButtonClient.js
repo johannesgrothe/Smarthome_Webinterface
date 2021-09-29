@@ -1,4 +1,4 @@
-import {getAPIAddress} from "./GetAPIAddress";
+import {getAPIAddress} from "../../GetAPIAddress";
 import {format} from "react-string-format";
 import {Button, Card} from "react-bootstrap";
 import React, {useState} from "react";
@@ -12,7 +12,7 @@ export default function ToggleClientButton({name}) {
         alert("Client was restartet")
         const response = generate_request(name)
         console.log("response: ", response)
-    };
+    }
 
     async function generate_request(name) {
         const API_URL = getAPIAddress(format('clients/{0}/restart', name));
@@ -21,8 +21,10 @@ export default function ToggleClientButton({name}) {
         });
         let result = await response.json();
         // alert(result.status);
-        console.log("result", result)
-        window.location.reload()
+        // console.log("result", result)
+        if (/successful/i.test(result)) {
+            window.location.reload()
+        }
         return response
     }
 
