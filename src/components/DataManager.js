@@ -4,7 +4,7 @@ import {Component} from "react";
 
 
 async function get_data(path) {
-    const API_URL = getAPIAddress("info")
+    const API_URL = getAPIAddress(path)
     let response = fetch(API_URL)
         .then(response => {
             return response.json()
@@ -28,30 +28,25 @@ async function generate_request(name, characteristic, data) {
     });
 
     let result = await response.json();
-    let res = result["status"]
-    console.log("result", res)
-    if (/successful/i.test(res)) {
-        // window.location.reload()
-    }
-    return response
+    return result
 }
 
 
 
 export default class DataManager extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
-    getBridgeInfo = (path) => {
+    async getInfo(path) {
         return get_data(path);
     }
 
-    generateGadgetRequest = (name, characteristic, data) => {
+    async generateGadgetRequest(name, characteristic, data) {
         return generate_request(name, characteristic, data);
     }
 
-    generateClientRequest = (name, characteristic, data) => {
+    async generateClientRequest(name, characteristic, data) {
         return generate_request(name, characteristic, data);
     }
 }

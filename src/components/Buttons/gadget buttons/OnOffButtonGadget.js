@@ -7,56 +7,39 @@ export default class OnOffButtonGadget extends Component{
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this)
-        // this.buttonText = ""
+        this.buttonText = ""
         this.characteristic = 3
-        this.state = {
-            setGadgetValue : this.props.gadgetFn,
-            buttonText : ""
-        }
-
     }
 
-    updateButtonText = () => {
+    updateGadgetStatus = () => {
         let gadgetStatus;
-        let buttonText;
         if (this.props.data === 0) {
             gadgetStatus = 1
-            buttonText = "On"
         } else {
             gadgetStatus = 0
-            buttonText = "Off"
         }
-        this.setState({
-            buttonText: buttonText
-        })
         return gadgetStatus
     }
 
-    handleChange = () => {
-        let gadgetStatus = this.updateButtonText();
+    async handleChange() {
+        let gadgetStatus = this.updateGadgetStatus();
         let req = new DataManager();
-        const response = req.generateGadgetRequest(this.props.name, this.characteristic, gadgetStatus);
-        this.state.setGadgetValue(gadgetStatus)
-        console.log("response from POST: ", response)
+        const response = await req.generateGadgetRequest(this.props.name, this.characteristic, gadgetStatus);
+        console.log("response from ToggleStatus request (POST): ", response)
+        this.props.gadgetFn(gadgetStatus)
     }
 
     componentDidMount() {
-        this.updateButtonText();
     }
 
     render() {
-        // if(this.props.data === 0){
-        //     this.buttonText = "Off"
-        // } else {
-        //     this.buttonText = "On"
-        // }
         return (
             <>
                 <Button   type={"checkbox"}
                           size={"sm"}
                           onClick={this.handleChange}
                           variant={"outline-primary"}
-                > {this.state.buttonText}
+                > {this.props.data === 0 ? "Off" : "On"}
                 </Button>
             </>
         )

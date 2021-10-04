@@ -16,7 +16,7 @@ export default class MainPage extends Component {
 
     componentDidMount() {
        let dataManager = new DataManager()
-       dataManager.getBridgeInfo("info")
+       dataManager.getInfo("info")
            .then(res => {
                this.setState({info:res})
            })

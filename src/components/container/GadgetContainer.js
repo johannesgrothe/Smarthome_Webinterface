@@ -5,16 +5,15 @@ import {format} from "react-string-format";
 import ToggleGadgetButton from "../Buttons/gadget buttons/OnOffButtonGadget";
 import RotationSpeedButton from "../Buttons/gadget buttons/RotationSpeedButton";
 import LightLevelButton from "../Buttons/gadget buttons/LightLevelButton";
-import DataContainer from "./DataContainer";
 
 export default class GadgetContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showChild: true,
-            gvalue: null
+            characteristics: this.props.gadget_data.characteristics
         }
-        this.setGadgetValue = this.setGadgetValue.bind(this);
+        this.updateGadget = this.updateGadget.bind(this);
     }
 
     componentDidMount() {
@@ -23,18 +22,14 @@ export default class GadgetContainer extends Component {
     componentWillUnmount() {
     }
 
-    setGadgetValue = (value) => {
-        this.setState({
-            gvalue: value
-        })
-        return "deine Mutter ist bei Munchkin nur die Hälfte wert";
+    updateGadget = () => {
+        this.props.refresh()
     }
 
     render() {
-        console.log("props: ", this.props.gadget_data)
         this.props.gadget_data.characteristics.map((gadget_characteristic, index) => {
             this.gadget_value = gadget_characteristic.value
-            this.gadget_characteristic = gadget_characteristic
+            this.state.characteristic = gadget_characteristic
             return this.gadget_value
         })
         return(
@@ -55,24 +50,32 @@ export default class GadgetContainer extends Component {
                                     <ToggleGadgetButton
                                         name={this.props.gadget_data.name}
                                         data={this.gadget_value}
-                                        gadgetFn={this.setGadgetValue}
+                                        gadgetFn={this.updateGadget}
                                     />
                                 </Row>
                                 <Row>
                                     {this.props.gadget_data.type !== 3 ? null : <RotationSpeedButton
                                         name={this.props.gadget_data.name}
-                                        data={this.gadget_characteristic.step}
+                                        data={this.state.characteristic.step}
                                     />}
                                 </Row>
                                 <Row>
                                     {this.props.gadget_data.type !== 1 ? null : <LightLevelButton
                                         name={this.props.gadget_data.name}
-                                        data={this.gadget_characteristic.max}
+                                        data={this.state.characteristic.max}
                                     />}
                                 </Row>
                             </Col>
                             <Col>
-                                <DataContainer data={this.gadget_characteristic} type={"gadget"} status={this.gvalue}/>
+                                <h3>characteristics:</h3>
+                                <p>
+                                    max: {this.state.characteristic.max}<br/>
+                                    min: {this.state.characteristic.min}<br/>
+                                    step: {this.state.characteristic.step}<br/>
+                                    port_mapping: {this.state.characteristic.port_mapping}<br/>
+                                    type: {this.state.characteristic.type}<br/>
+                                    value: {this.state.characteristic.value}<br/>
+                                </p>
                             </Col>
                         </Row>
                     </Col>

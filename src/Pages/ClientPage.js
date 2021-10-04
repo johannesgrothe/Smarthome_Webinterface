@@ -14,14 +14,10 @@ export default class ClientPage extends Component {
     }
 
     componentDidMount() {
-        const API_URL = getAPIAddress("clients")
-        fetch(API_URL)
-            .then(response => {
-                return response.json()
-            })
+        let dataManager = new DataManager()
+        dataManager.getInfo("clients")
             .then(res => {
                 this.setState(res)
-                console.log("state", this.state.clients)
             })
     }
 
