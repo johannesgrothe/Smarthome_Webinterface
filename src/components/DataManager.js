@@ -5,20 +5,20 @@ import {Component} from "react";
 
 async function get_data(path) {
     const API_URL = getAPIAddress(path)
-    let response = fetch(API_URL)
+    return await fetch(API_URL)
         .then(response => {
             return response.json()
         })
-    return response
 }
 
 async function generate_request(name, characteristic, data) {
     let req_data = {
         characteristic: characteristic,
         value: data
+
     };
 
-    const API_URL = getAPIAddress(format('gadgets/{0}/set_characteristic', name));
+    const API_URL = getAPIAddress(format('sync/gadget', name));
     let response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -27,8 +27,7 @@ async function generate_request(name, characteristic, data) {
         body: JSON.stringify(req_data)
     });
 
-    let result = await response.json();
-    return result
+    return await response.json()
 }
 
 
@@ -46,7 +45,7 @@ export default class DataManager extends Component {
         return generate_request(name, characteristic, data);
     }
 
-    async generateClientRequest(name, characteristic, data) {
-        return generate_request(name, characteristic, data);
+    async generateClientRequest(name, data) {
+        return generate_request(name, data);
     }
 }

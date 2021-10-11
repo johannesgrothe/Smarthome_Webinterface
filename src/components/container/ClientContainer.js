@@ -1,13 +1,25 @@
-import React, {Component, useState} from "react";
-import {Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-import ToggleGadgetButton from "../Buttons/gadget buttons/OnOffButtonGadget";
+import React, {Component} from "react";
+import {Card, Col, Row} from "react-bootstrap";
 import ToggleClientButton from "../Buttons/client buttons/OnOffButtonClient";
 
 export default class ClientContainer extends Component {
-    constructor(client_data) {
-        super();
-        console.log("data: ", client_data)
-        this.state = client_data
+    constructor(props) {
+        super(props);
+        this.state = {
+            client_data: this.props.client_data
+        }
+        console.log("client_data: ", this.state.client_data)
+        this.updateClient = this.updateClient.bind(this)
+    }
+
+    updateClient(){
+        this.props.refresh()
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUnmount() {
     }
 
     render() {
@@ -18,7 +30,7 @@ export default class ClientContainer extends Component {
                     <Row>
                         <Col md={3}>
                             <Row>
-                                <ToggleClientButton name={this.state.client_data.name}/>
+                                <ToggleClientButton name={this.state.client_data.name} clientFn={this.updateClient}/>
                             </Row>
                             <Row>
                             </Row>
@@ -33,7 +45,6 @@ export default class ClientContainer extends Component {
                                 {/*<a>port_mapping: {client_data.port_mapping}</a>*/}
                                 sw_branch: {this.state.client_data.sw_branch}<br/>
                                 sw_uploaded: {this.state.client_data.sw_uploaded}<br/>
-                                sw_version: {this.state.client_data.sw_version}<br/>
                             </p>
                         </Col>
                     </Row>

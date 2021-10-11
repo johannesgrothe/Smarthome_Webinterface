@@ -1,7 +1,5 @@
-import React, {Component, useState} from "react";
-import {Button, Card, Col, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-import {getAPIAddress} from "../GetAPIAddress";
-import {format} from "react-string-format";
+import React, {Component} from "react";
+import {Card, Col, Row} from "react-bootstrap";
 import ToggleGadgetButton from "../Buttons/gadget buttons/OnOffButtonGadget";
 import RotationSpeedButton from "../Buttons/gadget buttons/RotationSpeedButton";
 import LightLevelButton from "../Buttons/gadget buttons/LightLevelButton";
@@ -10,9 +8,9 @@ export default class GadgetContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showChild: true,
             characteristics: this.props.gadget_data.characteristics
         }
+        console.log("gadget_data: ", this.state.characteristics)
         this.updateGadget = this.updateGadget.bind(this);
     }
 
@@ -71,10 +69,9 @@ export default class GadgetContainer extends Component {
                                 <p>
                                     max: {this.state.characteristic.max}<br/>
                                     min: {this.state.characteristic.min}<br/>
-                                    step: {this.state.characteristic.step}<br/>
-                                    port_mapping: {this.state.characteristic.port_mapping}<br/>
+                                    step: {this.state.characteristic.step_value}<br/>
                                     type: {this.state.characteristic.type}<br/>
-                                    value: {this.state.characteristic.value}<br/>
+                                    value: {this.state.characteristic.true_value}<br/>
                                 </p>
                             </Col>
                         </Row>

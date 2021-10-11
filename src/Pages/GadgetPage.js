@@ -1,23 +1,22 @@
 import React, {Component} from "react";
-import {Card, Col, Container, Row} from "react-bootstrap";
-import {getAPIAddress} from "../components/GetAPIAddress";
+import {Col, Container, Row} from "react-bootstrap";
 import GadgetContainer from "../components/container/GadgetContainer";
-import GadgetManager from "../components/DataManager"
 import DataManager from "../components/DataManager";
 
 export default class GadgetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            gadgets: [],
+            gadgets: []
         }
         this.fetchGadgetData = this.fetchGadgetData.bind(this)
     }
 
     fetchGadgetData(){
         let dataManager = new DataManager()
-        dataManager.getInfo("gadgets")
+        dataManager.getInfo("info/gadgets")
             .then(res => {
+                console.log("result: ", res)
                 this.setState(res)
             })
     }
