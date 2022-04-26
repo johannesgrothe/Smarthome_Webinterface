@@ -1,0 +1,10 @@
+Datafetching:
+-
+
+
+Statemanagement (react redux):
+- Store (stores state of entire App)
+- hooks (RootState and dispatch)
+- Slice (uses Asnycthunk)
+- AsyncThunk (uses request function) 
+- request function 
