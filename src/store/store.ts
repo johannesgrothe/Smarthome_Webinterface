@@ -2,16 +2,14 @@ import {Action, configureStore, getDefaultMiddleware, ThunkAction,} from '@redux
 
 import {setupListeners} from "@reduxjs/toolkit/query";
 
-import InfoReducer from "../services/InfoReducer";
-import {infoSlice} from "../services/infoSlice";
+import { getDataSlice } from "../services/getDataSlice";
 
 export const store = configureStore({
   reducer: {
-    infos: InfoReducer,
-    [infoSlice.reducerPath]: infoSlice.reducer
+    [getDataSlice.reducerPath]: getDataSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(infoSlice.middleware)
+    getDefaultMiddleware().concat(getDataSlice.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

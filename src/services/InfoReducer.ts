@@ -1,3 +1,8 @@
+/*
+* Currently not used, as fetching data is now done via RTK Query
+* */
+
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import ApiRequests, {getAPIAddress} from "../hooks/ApiRequests";
 import {Action, AnyAction, createAsyncThunk, createSlice, PayloadAction, Reducer} from "@reduxjs/toolkit";
