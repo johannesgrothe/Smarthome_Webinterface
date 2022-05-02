@@ -1,13 +1,13 @@
 import * as WebBrowser from 'expo-web-browser';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
-import {MonoText} from '../StyledText';
-import {Text, View} from '../Themed';
+import { MonoText } from '../StyledText';
+import { Text, View } from '../Themed';
 import { useGetDataQuery } from "../../services/getDataSlice";
 
 export default function BridgeInfoContainer() {
 
-  const { data: bridge_info, isLoading, isSuccess, isError, error } = useGetDataQuery("/info/bridge")
+  const {data: bridge_info, isLoading, isSuccess, isError, error} = useGetDataQuery("/info/bridge")
 
   let content
 

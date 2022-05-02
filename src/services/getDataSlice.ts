@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import ApiRequests, {getAPIAddress} from "../hooks/ApiRequests";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getAPIAddress } from "../hooks/ApiRequests";
 
 let username: string = "bongobob"
 let pwd: string = "spongobob"

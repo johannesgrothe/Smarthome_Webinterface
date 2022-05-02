@@ -1,6 +1,6 @@
-import {Action, configureStore, getDefaultMiddleware, ThunkAction,} from '@reduxjs/toolkit'
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 
-import {setupListeners} from "@reduxjs/toolkit/query";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { getDataSlice } from "../services/getDataSlice";
 

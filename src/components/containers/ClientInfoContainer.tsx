@@ -1,7 +1,5 @@
-import {useEffect, useState} from "react";
-import ApiRequests, {getAPIAddress} from "../../hooks/ApiRequests";
-import {Text, View} from "../Themed";
-import {StyleSheet} from "react-native";
+import { Text, View } from "../Themed";
+import { StyleSheet } from "react-native";
 
 export default function ClientInfoContainer(info: any) {
   let client_info: Array<any> = info.data
