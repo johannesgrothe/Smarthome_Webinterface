@@ -1,37 +1,36 @@
 import { StyleSheet } from 'react-native'
 
 import {RootTabScreenProps} from "../types";
-import { View } from "../components/Themed";
-import ApiRequests, {getAPIAddress} from "../hooks/ApiRequests";
-import {useEffect, useState} from "react";
+import {Text, View} from "../components/Themed";
 import GadgetInfoContainer from "../components/containers/GadgetInfoContainer";
+import {useGetDataQuery} from "../services/getDataSlice";
 
 function extractData(data: object) {
-  console.log("spongo: ", data)
   let clients_arr: Array<any> = []
   data.gadgets.map((c_data, index) => {
-    console.log("Client_data: ", c_data)
     clients_arr[index] = c_data
   })
   return clients_arr
 }
 
 export default function GadgetScreen({navigation}: RootTabScreenProps<'Gadget'>) {
-  const [gadget_data, setData] = useState<object>([])
-  let url: string = getAPIAddress('info/gadgets')
-  let req = new ApiRequests()
-  useEffect(() =>{
-    req.getInfo(url).then(r => {
-      console.log(r)
-      setData(extractData(r))
-    })
-  }, [])
-  console.log("client_data: ", gadget_data)
+
+  const {data: gadget_info, isLoading, isSuccess, isError, error} = useGetDataQuery('/info/gadgets')
+
+  let content
+
+  if (isLoading) {
+    content = [<Text>Loading...</Text>]
+  } else if (isSuccess) {
+    content = extractData(gadget_info)
+  } else if (isError) {
+    content = [<Text>{error.toString()}</Text>]
+  }
 
   return (
     <View style={styles.container}>
       {
-        gadget_data.map((data, index) => {
+        content.map((data, index) => {
           return(<GadgetInfoContainer data={data} key={index}/>)})
       }
     </View>

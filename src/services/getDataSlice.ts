@@ -9,30 +9,22 @@ let headers = {
   Authorization: str
 }
 
-export const infoSlice = createApi({
-  reducerPath: 'info',
+export const getDataSlice = createApi({
+  reducerPath: 'getData',
   baseQuery: fetchBaseQuery({
     baseUrl: getAPIAddress('')
   },),
   endpoints: builder => ({
-    getInfo: builder.query({
-      query: ( name ) => ({
-        url: `/info/${name}`,
+    getData: builder.query({
+      query: ( path ) => ({
+        url: `${path}`,
         method: 'GET',
         headers: headers
       })
-    }),
-    getClientsInfo: builder.query({
-      query: () => 'info/clients'
-    }),
-    getGadgetsInfo: builder.query({
-      query: () => 'info/gadgets'
     }),
   })
 })
 
 export const {
-  useGetInfoQuery,
-  useGetClientsInfoQuery,
-  useGetGadgetsInfoQuery,
-} = infoSlice
+  useGetDataQuery,
+} = getDataSlice
