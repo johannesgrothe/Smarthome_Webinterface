@@ -1,9 +1,9 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 
-import {RootTabScreenProps} from "../types";
-import {Text, View} from "../components/Themed";
+import { RootTabScreenProps } from "../types";
+import { Text, View } from "../components/Themed";
 import ClientInfoContainer from "../components/containers/ClientInfoContainer";
-import {useGetDataQuery} from "../services/getDataSlice";
+import { useGetDataQuery } from "../services/getDataSlice";
 
 function extractData(data: object) {
   let clients_arr: Array<any> = []

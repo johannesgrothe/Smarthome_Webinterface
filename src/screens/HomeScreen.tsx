@@ -3,17 +3,12 @@ import { StyleSheet } from 'react-native'
 import { RootTabScreenProps } from "../types";
 import { View } from "../components/Themed";
 import BridgeInfoContainer from "../components/containers/BridgeInfoContainer";
-import SomeContainer from "../components/containers/SomeContainer";
 
 export default function HomeScreen({navigation}: RootTabScreenProps<'Home'>) {
-
-    // const { data, error, isLoading } = useGetInfoQuery('info/bridge')
-    // console.log("data. ", data)
 
     return (
         <View style={styles.container}>
             <BridgeInfoContainer />
-            {/*<SomeContainer path="/screens/SomeScreen.tsx"/>*/}
         </View>
     )
 }

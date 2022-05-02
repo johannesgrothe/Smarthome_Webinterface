@@ -104,15 +104,3 @@ export default InfoSlice.reducer
 //   }
 // })
 
-
-// export const getInfo = createApi({
-//   reducerPath: 'libertyApi',
-//   baseQuery: fetchBaseQuery({baseUrl:getAPIAddress("")}),
-//   endpoints: (builder) => ({
-//     getInfo: builder.query<any, string>({
-//       query: (name) => `${name}`,
-//     }),
-//   }),
-// })
-
-// export const { useGetInfoQuery } = getInfo
