@@ -15,7 +15,7 @@ export default function GadgetScreen({navigation}: RootTabScreenProps<'Gadget'>)
   if (isLoading) {
     content = [ <Text>Loading...</Text> ]
   } else if (isSuccess) {
-    content = gadget_info.gadgets.map((gadget_data, index) => <GadgetInfoContainer data={gadget_data} key={index}/>)
+    content = gadget_info.gadgets.map((gadget_data) => <GadgetInfoContainer data={gadget_data} key={gadget_data.id}/>)
   } else if (isError) {
     content = [ <Text>{error.toString()}</Text> ]
   }

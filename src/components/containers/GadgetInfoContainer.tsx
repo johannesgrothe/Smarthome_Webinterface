@@ -36,7 +36,7 @@ function RenderEventMap(event_map: object) {
 
 export default function GadgetInfoContainer(info: any) {
 
-  let characteristic = info.data.characteristics.map((char, index) => <RenderChars data={char} key={index}/>)
+  let characteristic = info.data.characteristics.map((char, index) => <RenderChars data={char} key={index.toString()}/>)
 
   return (
     <View style={styles.container}>
