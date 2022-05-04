@@ -8,4 +8,4 @@ node_modules/
 *.jpeg
 .eslintcache
 yarn.lock
-.expo/web/cache/
+.expo
