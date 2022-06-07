@@ -4,10 +4,20 @@ import Colors from '../../constants/Colors';
 import { MonoText } from '../StyledText';
 import { Text, View } from '../Themed';
 import { useGetDataQuery } from "../../services/getDataSlice";
+import { store } from "../../store/store";
 
 export default function BridgeInfoContainer() {
 
-  const {data: bridge_info, isLoading, isSuccess, isError, error} = useGetDataQuery("/info/bridge")
+  const headerString: string = 'Basic ' + Buffer.from(store.getState().auth.username + ':' + store.getState().auth.password, 'utf-8').toString('base64')
+
+  const queryArgs = {
+    path: '/info/bridge',
+    headers: {
+      Authorization: headerString
+    },
+  }
+
+  const {data: bridge_info, isLoading, isSuccess, isError, error} = useGetDataQuery(queryArgs)
 
   let content
 

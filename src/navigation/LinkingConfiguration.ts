@@ -10,24 +10,29 @@ import * as Linking from 'expo-linking';
 import { RootStackParamList } from '../types';
 
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [Linking.makeUrl('/')],
+  prefixes: [Linking.createURL('/')],
   config: {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          User: {
             screens: {
-              TabOneScreen: 'one',
-            },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
+              User: 'user'
             },
           },
           Home: {
             screens: {
               HomeScreen: 'home'
+            },
+          },
+          Client: {
+            screens: {
+              TabTwoScreen: 'gadget',
+            },
+          },
+          Gadget: {
+            screens: {
+              TabOneScreen: 'client',
             },
           },
         },

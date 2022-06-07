@@ -4,9 +4,17 @@ import { RootTabScreenProps } from "../types";
 import { Text, View } from "../components/Themed";
 import GadgetInfoContainer from "../components/containers/GadgetInfoContainer";
 import { useGetDataQuery } from "../services/getDataSlice";
+// import { userManager } from "../../App";
 
 
 export default function GadgetScreen({navigation}: RootTabScreenProps<'Gadget'>) {
+
+  const query_args = {
+    path: '/info/gadgets',
+    headers: {
+      // Authorization: 'Basic ' + Buffer.from(userManager.getMainUser().username + ':' + userManager.getMainUser().password, 'utf-8').toString('base64')
+    }
+  }
 
   const {data: gadget_info, isLoading, isSuccess, isError, error} = useGetDataQuery('/info/gadgets')
 
@@ -15,7 +23,7 @@ export default function GadgetScreen({navigation}: RootTabScreenProps<'Gadget'>)
   if (isLoading) {
     content = [ <Text>Loading...</Text> ]
   } else if (isSuccess) {
-    content = gadget_info.gadgets.map((gadget_data) => <GadgetInfoContainer data={gadget_data} key={gadget_data.id}/>)
+    content = gadget_info.gadgets.map((gadget_data: { id: any; }) => <GadgetInfoContainer data={gadget_data} key={gadget_data.id}/>);
   } else if (isError) {
     content = [ <Text>{error.toString()}</Text> ]
   }
