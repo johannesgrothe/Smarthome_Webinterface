@@ -4,10 +4,11 @@ import { RootTabScreenProps } from "../types";
 import { Text, View } from "../components/Themed";
 import ClientInfoContainer from "../components/containers/ClientInfoContainer";
 import { useGetDataQuery } from "../services/getDataSlice";
+import { BuildQueryArgs } from "../utils/buildQueryArgs";
 
 export default function ClientScreen({navigation}: RootTabScreenProps<'Client'>) {
 
-  const {data: client_info, isLoading, isSuccess, isError, error} = useGetDataQuery('/info/clients')
+  const {data: client_info, isLoading, isSuccess, isError, error} = useGetDataQuery(BuildQueryArgs('/info/clients'))
 
   let content
 

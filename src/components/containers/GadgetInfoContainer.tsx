@@ -16,24 +16,6 @@ function RenderChars(characteristics: object) {
   )
 }
 
-function RenderEventMap(event_map: object) {
-  let event: string;
-  let event_value: Array<any>;
-  Object.keys(event_map.data).forEach(key => {
-    event = key
-    event_value = event_map.data[key]
-  })
-
-  return (
-    <View>
-      <Text>
-        {event}: {event_value}
-      </Text>
-    </View>
-  )
-}
-
-
 export default function GadgetInfoContainer(info: any) {
 
   let characteristic = info.data.characteristics.map((char, index) => <RenderChars data={char} key={index.toString()}/>)
@@ -61,12 +43,6 @@ export default function GadgetInfoContainer(info: any) {
           <Text>
             characteristics: <br/><br/>
             {characteristic} <br/><br/>
-          </Text>
-        </View>
-        <View>
-          <Text>
-            event_map: <br/><br/>
-            <RenderEventMap data={info.data.event_map}/>
           </Text>
         </View>
       </Pressable>
