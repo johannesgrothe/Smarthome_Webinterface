@@ -1,25 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAPIAddress } from "../hooks/ApiRequests";
 
-// let username: string = "bongobob"
-// let pwd: string = "spongobob"
-// let str: string = 'Basic ' + Buffer.from(username + ':' + pwd, 'utf-8').toString('base64')
-
-// let headers = {
-//   Authorization: str
-// }
-
-export interface LogInHeaders {
-  Authorization: string;
-}
-
-export interface LogInRequestArgs {
-  path: string;
-  headers: LogInHeaders
-}
-
-
-
 export const getDataSlice = createApi({
   reducerPath: 'getData',
   baseQuery: fetchBaseQuery({

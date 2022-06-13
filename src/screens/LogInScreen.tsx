@@ -3,9 +3,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { View } from "../components/Themed";
 import { TextInput } from "react-native";
 import { useState } from "react";
-import { LogInRequestArgs, useLogInQuery } from "../services/getDataSlice";
+import { useLogInQuery } from "../services/getDataSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../services/authSlice";
+import { BuildQueryArgs } from "../utils/buildQueryArgs";
 
 export default function LogInScreen(props: any): JSX.Element {
   const dispatch = useDispatch();
@@ -14,28 +15,27 @@ export default function LogInScreen(props: any): JSX.Element {
   const [ show, setShow ] = useState(false)
   const [ skip, setSkip ] = useState(true)
 
-  const queryArgs: LogInRequestArgs = {
-    path: 'info/bridge',
-    headers: {
-      Authorization: 'Basic ' + Buffer.from(username + ':' + password, 'utf-8').toString('base64')
-    },
-  };
-
-  const {isSuccess, isError, error} = useLogInQuery(queryArgs, {skip});
+  const {isSuccess, isError, error} = useLogInQuery(BuildQueryArgs('info/bridge'), {skip});
 
   const handleClick = () => {
-    if ((username !== '' || username !== null) && (password !== '' || username !== null)) {
-      setSkip(false)
-      if (isSuccess) {
-        console.log("credentials are valid");
-        const isAuthorized: boolean = true
-        dispatch(setCredentials({username, password, isAuthorized}))
-        props.setIsAuthorized(isAuthorized)
-        setSkip(true)
-      }
-      if (isError) {
-        console.log("error ocurred: ", error);
-      }
+    let isAuthorized: boolean = false;
+    if (!(username == '' || username == null) && !(password == '' || password == null)) {
+      dispatch(setCredentials({username, password, isAuthorized}))
+      setSkip(!skip)
+      setTimeout(() =>{
+        console.log(skip)
+        if (isSuccess) {
+          console.log("credentials are valid");
+          isAuthorized = isSuccess;
+          dispatch(setCredentials({username, password, isAuthorized}));
+          props.setIsAuthorized(isAuthorized);
+        }
+        if (isError) {
+          console.log("error ocurred: ", error);
+        }
+      }, 1000);
+    } else {
+      alert("please provide credentials")
     }
   }
 
@@ -60,7 +60,7 @@ export default function LogInScreen(props: any): JSX.Element {
               />
               <Button title={'show'} onPress={handleShow}/>
             </View>
-            <Button title={'LogIn'} onPress={handleClick}/>
+            <Button title={skip ? 'log In' : 'logging in...'} onPress={handleClick}/>
           </View>
         </View>
       </View>

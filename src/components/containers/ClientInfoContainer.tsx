@@ -13,7 +13,6 @@ export default function ClientInfoContainer(info: any) {
         is_active: {client_info.is_active} <br/>
         last_connected: {client_info.last_connected} <br/>
         name: {client_info.name} <br/>
-        {/*port_mapping: {spongo.port_mapping}*/}
         runtime_id: {client_info.runtime_id} <br/>
         sw_branch: {client_info.sw_branch} <br/>
         sw_commit: {client_info.sw_commit} <br/>
