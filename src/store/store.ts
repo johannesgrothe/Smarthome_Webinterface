@@ -1,25 +1,23 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-
-import { setupListeners } from "@reduxjs/toolkit/query";
-
-import { getDataSlice } from '../services/getDataSlice';
-import authReducer from '../services/authSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../services/authSlice";
+import { gadgetSlice } from "../services/gadgetApiSlice";
+import { bridgeSlice } from "../services/bridgeApiSlice";
+import { clientSlice } from "../services/clientApiSlice";
 
 export const store = configureStore({
   reducer: {
-    [getDataSlice.reducerPath]: getDataSlice.reducer,
+    [bridgeSlice.reducerPath]: bridgeSlice.reducer,
+    [clientSlice.reducerPath]: clientSlice.reducer,
+    [gadgetSlice.reducerPath]: gadgetSlice.reducer,
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(getDataSlice.middleware)
-})
+    getDefaultMiddleware().concat(
+      gadgetSlice.middleware,
+      bridgeSlice.middleware,
+      clientSlice.middleware
+    ),
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
-  RootState,
-  unknown,
-  Action<string>>;
-
-
-// setupListeners(store.dispatch)
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
