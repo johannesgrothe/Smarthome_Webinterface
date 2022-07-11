@@ -16,7 +16,6 @@ interface ClientInfoProps {
 
 export function ClientInfoContainer(props: any) {
   const clientProps: ClientInfoProps = props.props;
-  console.log(clientProps);
 
   return (
     <Container>

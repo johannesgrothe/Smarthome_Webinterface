@@ -18,7 +18,7 @@ export function Navigation() {
       <Row>
         <RenderInterfaceHeader />
       </Row>
-      <Row>
+      <Row style={{ height: "100%", width: "100%" }}>
         <Col style={styles.navCol}>
           {!isAuthorized ? (
             <LogInRoutes setIsAuthorized={setIsAuthorized} />
@@ -59,22 +59,20 @@ function RenderInterfaceHeader() {
 
 function RenderSideTabNavigator() {
   return (
-    <>
-      <Col>
-        <Row>
-          <Link to={"/Home"}> Home </Link>
-        </Row>
-        <Row>
-          <Link to={"/BridgeInfo"}> Bridge </Link>
-        </Row>
-        <Row>
-          <Link to={"/ClientInfo"}> Client </Link>
-        </Row>
-        <Row>
-          <Link to={"/GadgetInfo"}> Gadget </Link>
-        </Row>
-      </Col>
-    </>
+    <Col>
+      <Row>
+        <Link to={"/Home"}> Home </Link>
+      </Row>
+      <Row>
+        <Link to={"/BridgeInfo"}> Bridge </Link>
+      </Row>
+      <Row>
+        <Link to={"/ClientInfo"}> Client </Link>
+      </Row>
+      <Row>
+        <Link to={"/GadgetInfo"}> Gadget </Link>
+      </Row>
+    </Col>
   );
 }
 
@@ -111,7 +109,7 @@ const styles: StyleSheet = {
     width: "100%",
     flexDirection: "column",
     display: "flex",
-    justifyContent: "center",
+    height: "100%",
   },
   headerContainer: {
     width: "100%",
@@ -127,9 +125,12 @@ const styles: StyleSheet = {
   navCol: {
     display: "flex",
     justifyContent: "left",
+    height: "100%",
   },
   contentContainer: {
     width: "85%",
+    maxHeight: "100%",
+    height: "100%",
   },
   contentCol: {
     width: "100%",

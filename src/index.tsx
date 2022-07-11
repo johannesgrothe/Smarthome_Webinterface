@@ -1,20 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Navigation } from "./components/navigation/Navigation";
 import { Provider } from "react-redux";
-import { store } from './store/store'
-import { Container } from 'react-bootstrap';
+import { store } from "./store/store";
+import { Container } from "react-bootstrap";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Container fluid>
+      <Container fluid style={{ height: "100%", width: "100%" }}>
         <BrowserRouter>
           <Navigation />
         </BrowserRouter>
