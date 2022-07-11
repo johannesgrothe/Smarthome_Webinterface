@@ -7,5 +7,5 @@ node_modules/
 *.jpg
 *.jpeg
 .eslintcache
+build
 yarn.lock
-.expo
