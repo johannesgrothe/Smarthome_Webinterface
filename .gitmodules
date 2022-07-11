@@ -1,0 +1,6 @@
+[submodule "system"]
+	path = system
+	url = git@github.com:johannesgrothe/Smarthome_System.git
+[submodule "src/system"]
+	path = src/system
+	url = git@github.com:johannesgrothe/Smarthome_System.git
