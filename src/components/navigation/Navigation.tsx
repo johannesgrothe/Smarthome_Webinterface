@@ -18,6 +18,7 @@ export function Navigation() {
       <Row>
         <RenderInterfaceHeader />
       </Row>
+      {/*TODO: replace inline styling*/}
       <Row style={{ height: "100%", width: "100%" }}>
         <Col style={styles.navCol}>
           {!isAuthorized ? (
@@ -76,7 +77,9 @@ function RenderSideTabNavigator() {
   );
 }
 
-function LogInRoutes(props: any) {
+function LogInRoutes(props: {
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <Routes>
       <Route
@@ -100,6 +103,7 @@ function WebRoutes() {
   );
 }
 
+// move this to separate file containing common interfaces
 export interface StyleSheet {
   [key: string]: React.CSSProperties;
 }

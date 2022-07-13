@@ -14,30 +14,28 @@ interface ClientInfoProps {
   sw_uploaded: string;
 }
 
-export function ClientInfoContainer(props: any) {
-  const clientProps: ClientInfoProps = props.props;
-
+export function ClientInfoContainer(props: ClientInfoProps) {
   return (
     <Container>
       <p>
-        api_version: {clientProps.api_version} <br />
-        boot_mode: {clientProps.boot_mode}
+        api_version: {props.api_version} <br />
+        boot_mode: {props.boot_mode}
         <br />
-        created: {clientProps.created}
+        created: {props.created}
         <br />
-        is_active: {clientProps.is_active}
+        is_active: {props.is_active}
         <br />
-        last_connected: {clientProps.last_connected}
+        last_connected: {props.last_connected}
         <br />
-        name: {clientProps.name}
+        name: {props.name}
         <br />
-        runtime_id: {clientProps.runtime_id}
+        runtime_id: {props.runtime_id}
         <br />
-        sw_branch: {clientProps.sw_branch}
+        sw_branch: {props.sw_branch}
         <br />
-        sw_commit: {clientProps.sw_commit}
+        sw_commit: {props.sw_commit}
         <br />
-        sw_uploaded: {clientProps.sw_uploaded}
+        sw_uploaded: {props.sw_uploaded}
         <br />
       </p>
     </Container>

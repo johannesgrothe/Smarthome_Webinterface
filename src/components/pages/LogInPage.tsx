@@ -1,14 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useBridgeInfoQuery } from "../../services/bridgeApiSlice";
 import { BuildQueryArgs } from "../../utils/buildQueryArgs";
 import { setAuthorizedState, setCredentials } from "../../services/authSlice";
 import { useDispatch } from "react-redux";
 
-export function LogInPage(props: any) {
+export function LogInPage(props: {
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   console.log(props);
   const dispatch = useDispatch();
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false); TODO: give user option to view password
   const [skip, setSkip] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +21,9 @@ export function LogInPage(props: any) {
   );
 
   const handleOnClick = () => {
-    let isAuthorized: boolean = false;
+    let isAuthorized = false;
     if (
+      // TODO: this is retarded...
       !(username === "" || username == null) &&
       !(password === "" || password == null)
     ) {
@@ -60,6 +63,7 @@ export function LogInPage(props: any) {
                 as="input"
                 placeholder="spongobob"
                 id="username"
+                // TODO: rethink this
                 onChange={(event) => handleUsernameInput(event.target.value)}
               />
             </Form.Group>
@@ -69,6 +73,7 @@ export function LogInPage(props: any) {
                 type="password"
                 id="password"
                 placeholder="Password"
+                // TODO: rethink this as well
                 onChange={(event) => handlePasswordInput(event.target.value)}
               />
             </Form.Group>

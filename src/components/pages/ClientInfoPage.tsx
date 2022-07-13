@@ -18,7 +18,7 @@ export function ClientInfoPage() {
     content = <p> fetching data... </p>;
   }
   if (isSuccess) {
-    content = client_data.clients.map((client_info: { name: any }) => (
+    content = client_data.clients.map((client_info: { name: string }) => (
       <ClientInfoContainer props={client_info} key={client_info.name} />
     ));
     console.log("client_data: ", client_data);

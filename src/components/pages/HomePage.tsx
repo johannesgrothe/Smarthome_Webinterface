@@ -6,6 +6,7 @@ export function HomePage() {
     <Container fluid style={styles.container}>
       <Row md={4}>
         <Col sm={4} style={styles.col}>
+          {/*TODO: replace inline styling*/}
           <Card style={{ width: "100%" }}>
             <Card.Title style={{ paddingLeft: 10, paddingTop: 10 }}>
               <h1>Welcome to the LibertyHome user interface!</h1>
@@ -20,7 +21,7 @@ export function HomePage() {
   );
 }
 
-let styles: StyleSheet = {
+const styles: StyleSheet = {
   col: {
     display: "flex",
     flexDirection: "column",

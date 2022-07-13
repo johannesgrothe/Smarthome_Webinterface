@@ -28,13 +28,14 @@ export function BridgeInfoPage() {
 
   return (
     <>
+      {/*TODO: replace inline styling*/}
       <h3 style={{ padding: 20 }}> Bridge Info </h3>
       <Container style={styles.mainContainer}>{content}</Container>
     </>
   );
 }
 
-let styles: StyleSheet = {
+const styles: StyleSheet = {
   mainContainer: {
     padding: 20,
   },
