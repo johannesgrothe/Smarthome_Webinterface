@@ -1,7 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { useGadgetInfoQuery } from "../../services/gadgetApiSlice";
 import { BuildQueryArgs } from "../../utils/buildQueryArgs";
-import { GadgetInfoContainer } from "../view_container/GadgetInfoContainer";
+import {
+  GadgetInfoContainer,
+  GadgetInfoContainerProps,
+} from "../view_container/GadgetInfoContainer";
 
 export function GadgetInfoPage() {
   const {
@@ -17,9 +20,13 @@ export function GadgetInfoPage() {
   if (isLoading) {
     content = [<p>Loading...</p>];
   } else if (isSuccess) {
-    content = gadget_info.gadgets.map((gadget_data: { id: string }) => {
-      return <GadgetInfoContainer props={gadget_data} key={gadget_data.id} />;
-    });
+    content = gadget_info.gadgets.map(
+      (gadget_data: GadgetInfoContainerProps) => {
+        return (
+          <GadgetInfoContainer gadget_info={gadget_data} key={gadget_data.id} />
+        );
+      }
+    );
   } else if (isError) {
     content = [<p>{error?.toString()}</p>];
   }
