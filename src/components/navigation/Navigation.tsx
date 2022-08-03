@@ -62,7 +62,7 @@ function RenderSideTabNavigator() {
   return (
     <Col>
       <Row>
-        <Link to={"/Home"}> Home </Link>
+        <Link to={"/"}> Home </Link>
       </Row>
       <Row>
         <Link to={"/BridgeInfo"}> Bridge </Link>
@@ -94,7 +94,7 @@ function WebRoutes() {
   return (
     <>
       <Routes>
-        <Route path={"/Home"} element={<HomePage />} />
+        <Route path={"/"} element={<HomePage />} />
         <Route path={"/BridgeInfo"} element={<BridgeInfoPage />} />
         <Route path={"/ClientInfo"} element={<ClientInfoPage />} />
         <Route path={"/GadgetInfo"} element={<GadgetInfoPage />} />
