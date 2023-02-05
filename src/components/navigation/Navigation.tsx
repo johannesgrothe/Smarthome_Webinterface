@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { Container, Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { BridgeInfoPage } from "../pages/BridgeInfoPage";
 import { HomePage } from "../pages/HomePage";
 import { GadgetInfoPage } from "../pages/GadgetInfoPage";
 import { ClientInfoPage } from "../pages/ClientInfoPage";
-import { store } from "../../store/store";
 import { LogInPage } from "../pages/LogInPage";
 
 export function Navigation() {
   const [isAuthorized, setIsAuthorized] = useState(
-    store.getState().auth.isAuthorized
   );
 
   return (
@@ -21,11 +19,6 @@ export function Navigation() {
       {/*TODO: replace inline styling*/}
       <Row style={{ height: "100%", width: "100%" }}>
         <Col style={styles.navCol}>
-          {!isAuthorized ? (
-            <LogInRoutes setIsAuthorized={setIsAuthorized} />
-          ) : (
-            <RenderContent />
-          )}
         </Col>
       </Row>
     </Container>

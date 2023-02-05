@@ -1,46 +1,29 @@
 import React, { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { useBridgeInfoQuery } from "../../services/bridgeApiSlice";
-import { BuildQueryArgs } from "../../utils/buildQueryArgs";
-import { setAuthorizedState, setCredentials } from "../../services/authSlice";
-import { useDispatch } from "react-redux";
 
 export function LogInPage(props: {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   console.log(props);
-  const dispatch = useDispatch();
   // const [show, setShow] = useState(false); TODO: give user option to view password
   const [skip, setSkip] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isSuccess, isError, error } = useBridgeInfoQuery(
-    BuildQueryArgs("info/bridge"),
-    { skip }
-  );
+  // TODO: fetch bridge data to authorize user, as there is no login request yet :/
+  //  switch to authProvider from RA at that point
 
   const handleOnClick = () => {
-    let isAuthorized = false;
-    if (
-      // TODO: this is retarded...
-      !(username === "" || username == null) &&
-      !(password === "" || password == null)
-    ) {
-      dispatch(setCredentials({ username, password, isAuthorized }));
-      setSkip(!skip);
-      if (isSuccess) {
-        console.log("credentials are valid");
-        isAuthorized = isSuccess;
-        dispatch(setAuthorizedState({ isAuthorized }));
-        props.setIsAuthorized(isAuthorized);
-      }
-      if (isError) {
-        console.log("error ocurred: ", error);
-      }
-    } else {
-      alert("please provide credentials");
-    }
+    // let isAuthorized = false;
+    // if (
+    //   // TODO: this is retarded...
+    //   !(username === "" || username == null) &&
+    //   !(password === "" || password == null)
+    // ) {
+    //   setSkip(!skip);
+    // } else {
+    //   alert("please provide credentials");
+    // }
   };
 
   const handleUsernameInput = (username: string) => {

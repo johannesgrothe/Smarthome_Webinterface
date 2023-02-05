@@ -1,25 +1,63 @@
-import React from "react";
+import React, { FC } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 // import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-import { Navigation } from "./components/navigation/Navigation";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-import { Container } from "react-bootstrap";
+import { Admin, Layout, Menu, Resource, Title, useResourceDefinitions } from "react-admin";
+import { HomePage } from "./components/pages/HomePage";
+import { BridgeInfoPage } from "./components/pages/BridgeInfoPage";
+import LabelIcon from "@mui/icons-material/Label"
+import { buildDataProvider } from "./utils/buildDataProvider";
+import { getAPIAddress } from "./utils/getApiAdress";
+import { Typography } from "@mui/material";
+
+const AppBar = (props: any) => {
+  return (
+    <AppBar
+      sx={{
+        "& .RaAppBar-title": {
+          flex: 1,
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+        },
+      }}
+      {...props}>
+      <Typography
+        variant="h6"
+        color="inherit"
+        id="react-admin-title"
+      />
+      <Title title="Liberty Home"/>
+    </AppBar>
+  )
+}
+
+const AppMenu = () => {
+  const resources = useResourceDefinitions();
+  return (
+    <Menu >
+      <Title title="Liberty Home" />
+      {Object.keys(resources).map(name => <Menu.Item key={name} to={`/${name}`} primaryText={name} />)}
+    </Menu>
+  )
+}
+
+const AppLayout = (props: any) => {
+  return (<Layout {...props} menu={AppMenu}/>);
+}
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Container fluid style={{ height: "100%", width: "100%" }}>
-        <BrowserRouter>
-          <Navigation />
-        </BrowserRouter>
-      </Container>
-    </Provider>
+    <Admin dashboard={HomePage} layout={AppLayout} dataProvider={buildDataProvider(getAPIAddress())}>
+      <Resource name="home" list={HomePage}/>
+      <Resource name="bridge" list={BridgeInfoPage}/>
+      {/*<Resource name="gadgets" />*/}
+      {/*<Resource name="clients" />*/}
+    </Admin>
   </React.StrictMode>
 );
 

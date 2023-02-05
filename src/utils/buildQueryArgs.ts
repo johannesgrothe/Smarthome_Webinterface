@@ -1,4 +1,3 @@
-import { store } from "../store/store";
 import { Buffer } from "buffer";
 
 interface LogInHeaders {
@@ -11,16 +10,16 @@ interface QueryArgs {
   headers: LogInHeaders;
 }
 
-export function BuildQueryArgs(path: string): QueryArgs {
+export function BuildQueryArgs(path: string, method: string | undefined): QueryArgs {
   const auth: string =
     "Basic " +
     Buffer.from(
-      store.getState().auth.username + ":" + store.getState().auth.password,
       "utf-8"
     ).toString("base64");
 
   return {
     path: path,
+    method,
     headers: {
       Authorization: auth,
     },

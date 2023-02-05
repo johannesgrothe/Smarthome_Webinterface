@@ -1,36 +1,19 @@
 import { Container } from "react-bootstrap";
-import { useBridgeInfoQuery } from "../../services/bridgeApiSlice";
-import { BuildQueryArgs } from "../../utils/buildQueryArgs";
 import React from "react";
 import { StyleSheet } from "../navigation/Navigation";
+import { useResourceContext } from "react-admin";
 
 export function BridgeInfoPage() {
-  const {
-    data: bridge_data,
-    isSuccess,
-    isLoading,
-    isError,
-    error,
-  } = useBridgeInfoQuery(BuildQueryArgs("info/bridge"));
-
-  let content;
-
-  if (isLoading) {
-    content = <h1> fetching data... </h1>;
-  }
-  if (isSuccess) {
-    content = RenderBridgeInfo(bridge_data);
-  }
-  if (isError) {
-    content = <h1> something went wrong </h1>;
-    console.log("error while fetching bridge data: ", error);
+  const record = useResourceContext();
+  if (!record) {
+    return null;
   }
 
   return (
     <>
       {/*TODO: replace inline styling*/}
       <h3 style={{ padding: 20 }}> Bridge Info </h3>
-      <Container style={styles.mainContainer}>{content}</Container>
+      <Container style={styles.mainContainer}></Container>
     </>
   );
 }
