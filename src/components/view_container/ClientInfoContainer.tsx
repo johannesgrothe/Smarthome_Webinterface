@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 
-interface ClientInfoProps {
+export interface ClientInfoProps {
   api_version: string;
   boot_mode: number;
   created: string;
@@ -14,28 +14,28 @@ interface ClientInfoProps {
   sw_uploaded: string;
 }
 
-export function ClientInfoContainer(props: ClientInfoProps) {
+export function ClientInfoContainer(props: { client_info: ClientInfoProps }) {
   return (
     <Container>
       <p>
-        api_version: {props.api_version} <br />
-        boot_mode: {props.boot_mode}
+        api_version: {props.client_info.api_version} <br />
+        boot_mode: {props.client_info.boot_mode}
         <br />
-        created: {props.created}
+        created: {props.client_info.created}
         <br />
-        is_active: {props.is_active}
+        is_active: {props.client_info.is_active}
         <br />
-        last_connected: {props.last_connected}
+        last_connected: {props.client_info.last_connected}
         <br />
-        name: {props.name}
+        name: {props.client_info.name}
         <br />
-        runtime_id: {props.runtime_id}
+        runtime_id: {props.client_info.runtime_id}
         <br />
-        sw_branch: {props.sw_branch}
+        sw_branch: {props.client_info.sw_branch}
         <br />
-        sw_commit: {props.sw_commit}
+        sw_commit: {props.client_info.sw_commit}
         <br />
-        sw_uploaded: {props.sw_uploaded}
+        sw_uploaded: {props.client_info.sw_uploaded}
         <br />
       </p>
     </Container>

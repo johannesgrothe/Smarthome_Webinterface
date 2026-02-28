@@ -1,21 +1,21 @@
 import { ReactElement } from "react";
 import { Container } from "react-bootstrap";
 
-interface GadgetInfoContainerProps {
+export interface GadgetInfoContainerProps {
   // TODO: this will get more once the restructuring of the gadgets is done
   id: string;
   type: number;
 }
 
-export function GadgetInfoContainer(
-  props: GadgetInfoContainerProps
-): ReactElement {
+export function GadgetInfoContainer(props: {
+  gadget_info: GadgetInfoContainerProps;
+}): ReactElement {
   return (
     <Container>
       <p>
-        id: {props.id}
+        id: {props.gadget_info.id}
         <br />
-        type: {props.type}
+        type: {props.gadget_info.type}
         <br />
         <br />
         <br />

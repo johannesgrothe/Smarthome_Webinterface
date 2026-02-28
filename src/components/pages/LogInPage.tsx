@@ -8,17 +8,15 @@ import { useDispatch } from "react-redux";
 export function LogInPage(props: {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  console.log(props);
   const dispatch = useDispatch();
   // const [show, setShow] = useState(false); TODO: give user option to view password
   const [skip, setSkip] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isSuccess, isError, error } = useBridgeInfoQuery(
-    BuildQueryArgs("info/bridge"),
-    { skip }
-  );
+  const { isSuccess, isError, error } = useBridgeInfoQuery(BuildQueryArgs(), {
+    skip,
+  });
 
   const handleOnClick = () => {
     let isAuthorized = false;

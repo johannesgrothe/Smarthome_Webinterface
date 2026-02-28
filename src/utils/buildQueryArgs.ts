@@ -6,12 +6,12 @@ interface LogInHeaders {
 }
 
 interface QueryArgs {
-  path: string;
   method?: string;
   headers: LogInHeaders;
+  body?: string;
 }
 
-export function BuildQueryArgs(path: string): QueryArgs {
+export function BuildQueryArgs(body?: string | undefined): QueryArgs {
   const auth: string =
     "Basic " +
     Buffer.from(
@@ -19,10 +19,16 @@ export function BuildQueryArgs(path: string): QueryArgs {
       "utf-8"
     ).toString("base64");
 
-  return {
-    path: path,
-    headers: {
-      Authorization: auth,
-    },
-  };
+  return body
+    ? {
+        headers: {
+          Authorization: auth,
+        },
+      }
+    : {
+        headers: {
+          Authorization: auth,
+        },
+        body: body,
+      };
 }

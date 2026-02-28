@@ -1,7 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { useClientInfoQuery } from "../../services/clientApiSlice";
 import { BuildQueryArgs } from "../../utils/buildQueryArgs";
-import { ClientInfoContainer } from "../view_container/ClientInfoContainer";
+import {
+  ClientInfoContainer,
+  ClientInfoProps,
+} from "../view_container/ClientInfoContainer";
 
 export function ClientInfoPage() {
   const {
@@ -18,8 +21,8 @@ export function ClientInfoPage() {
     content = <p> fetching data... </p>;
   }
   if (isSuccess) {
-    content = client_data.clients.map((client_info: { name: string }) => (
-      <ClientInfoContainer props={client_info} key={client_info.name} />
+    content = client_data.clients.map((client_info: ClientInfoProps) => (
+      <ClientInfoContainer client_info={client_info} key={client_info.name} />
     ));
     console.log("client_data: ", client_data);
   }

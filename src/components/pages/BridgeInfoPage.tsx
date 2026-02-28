@@ -1,17 +1,27 @@
-import { Container } from "react-bootstrap";
-import { useBridgeInfoQuery } from "../../services/bridgeApiSlice";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import {
+  useBridgeInfoQuery,
+  useBridgeUpdateCheckQuery,
+  useBridgeUpdateExecuteQuery,
+} from "../../services/bridgeApiSlice";
 import { BuildQueryArgs } from "../../utils/buildQueryArgs";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "../navigation/Navigation";
+import {
+  RenderBridgeInfo,
+  RenderUpdateCheckData,
+} from "../view_container/BridgeInfoContainer";
 
 export function BridgeInfoPage() {
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
+  const [skip, setSkip] = useState(true);
   const {
     data: bridge_data,
     isSuccess,
     isLoading,
     isError,
     error,
-  } = useBridgeInfoQuery(BuildQueryArgs("info/bridge"));
+  } = useBridgeInfoQuery(BuildQueryArgs());
 
   let content;
 
@@ -26,45 +36,100 @@ export function BridgeInfoPage() {
     console.log("error while fetching bridge data: ", error);
   }
 
+  const {
+    data: bridge_update_data,
+    isSuccess: isCheckSuccess,
+    isError: isCheckError,
+    error: checkError,
+  } = useBridgeUpdateCheckQuery(BuildQueryArgs(), { skip });
+
+  let reRenderPrevention: boolean | undefined;
+
+  if (isCheckSuccess) {
+    console.log(skip);
+    reRenderPrevention = bridge_update_data.update_available;
+  }
+  if (isCheckError) {
+    console.log(checkError);
+  }
+  // TODO: remove this shitty workaround...
+  if (reRenderPrevention) {
+    setIsUpdateAvailable(reRenderPrevention);
+  }
+
+  const handleOnClick = () => {
+    setSkip(false);
+  };
+
   return (
     <>
-      {/*TODO: replace inline styling*/}
-      <h3 style={{ padding: 20 }}> Bridge Info </h3>
-      <Container style={styles.mainContainer}>{content}</Container>
+      <h3 style={pageStyles.heading}> Bridge Info </h3>
+      <Container style={pageStyles.mainContainer}>
+        <Col>
+          <Row>{content}</Row>
+          {isUpdateAvailable ? (
+            <>
+              <RenderUpdateCheckData bridge_data={bridge_update_data} />
+              <RenderBridgeUpdateCheck isUpdateAvailable={isUpdateAvailable} />
+            </>
+          ) : (
+            <Button onClick={handleOnClick}>check for updates</Button>
+          )}
+        </Col>
+      </Container>
     </>
   );
 }
 
-const styles: StyleSheet = {
+const pageStyles: StyleSheet = {
   mainContainer: {
+    padding: 20,
+  },
+  heading: {
     padding: 20,
   },
 };
 
-interface BridgeInfoProps {
-  bridge_name: string;
-  git_version: string;
-  pipenv_version: string;
-  platformio_version: string;
-  python_version: string;
-  running_since: string;
-  software_branch: string;
-  software_commit: string;
-}
+function RenderBridgeUpdateCheck(props: { isUpdateAvailable: boolean }) {
+  const [skip, setSkip] = useState(true);
 
-function RenderBridgeInfo(props: BridgeInfoProps) {
+  const {
+    isSuccess: isExecuteSuccess,
+    isLoading: isExecuteLoading,
+    isError: isExecuteError,
+    error: executeError,
+  } = useBridgeUpdateExecuteQuery(BuildQueryArgs(), { skip });
+
+  let content;
+
+  if (isExecuteLoading) {
+    content = <h3>still updating...</h3>;
+  }
+  if (isExecuteSuccess) {
+    content = <h3>update applied successfully!</h3>;
+    setSkip(true);
+  }
+  if (isExecuteError) {
+    content = <h3>error while updating!</h3>;
+    console.log(executeError);
+  }
+
+  const handleClick = () => {
+    setSkip(false);
+  };
+
   return (
     <Container>
-      <p>
-        bridge_name: {props.bridge_name} <br />
-        git_version: {props.git_version} <br />
-        pipenv_version: {props.pipenv_version} <br />
-        platformio_version: {props.platformio_version} <br />
-        python_version: {props.python_version} <br />
-        running_since: {props.running_since} <br />
-        software_branch: {props.software_branch} <br />
-        software_commit: {props.software_commit} <br />
-      </p>
+      <Col>
+        {props.isUpdateAvailable ? (
+          <>
+            {content}
+            <Button onClick={handleClick}>Update Bridge</Button>
+          </>
+        ) : (
+          <h3>bridge is up to date</h3>
+        )}
+      </Col>
     </Container>
   );
 }
